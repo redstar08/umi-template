@@ -1,0 +1,77 @@
+{
+    "name": "umi-template",
+    "version": "0.0.1",
+    "private": true,
+    "description": "umi-template",
+    "keywords": [
+        "umi-template"
+    ],
+    "homepage": "https://github.com/redstar08/umi-template",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/redstar08/umi-template.git"
+    },
+    "license": "MIT",
+    "author": "redstar08",
+    "main": "main.js",
+    "scripts": {
+        "build": "cross-env REACT_APP_ENV=pro max build",
+        "dev": "MOCK=none max dev",
+        "format": "prettier --cache --write .",
+        "postinstall": "max setup",
+        "prettier": "prettier . --write",
+        "setup": "max setup",
+        "start": "MOCK=none npm run dev",
+        "start:mock": "npm run dev",
+        "update:assets": "node ./tools/generate-img-map.js"
+    },
+    "dependencies": {
+        "@ahooksjs/use-url-state": "^3.5.1",
+        "@ant-design/icons": "^5.5.1",
+        "@umijs/max": "^4.0.26",
+        "@zumer/snapdom": "^1.9.9",
+        "ahooks": "^3.7.2",
+        "animate.css": "^4.1.1",
+        "antd": "^5.26.7",
+        "circletype": "^2.3.0",
+        "classnames": "^2.5.1",
+        "cross-env": "^7.0.3",
+        "dayjs": "^1.11.11",
+        "dompurify": "^3.1.6",
+        "lodash": "^4.17.21",
+        "mime": "^4.0.7",
+        "uuid": "^11.0.3"
+    },
+    "devDependencies": {
+        "@trivago/prettier-plugin-sort-imports": "4.3.0",
+        "@types/lodash": "^4.17.7",
+        "@types/react": "^18.0.22",
+        "@types/react-dom": "^18.0.7",
+        "chalk": "^4.1.2",
+        "copy-webpack-plugin": "10",
+        "lottie-web": "^5.10.2",
+        "mini-css-extract-plugin": "^2.9.2",
+        "prettier": "^3.6.2",
+        "prettier-plugin-packagejson": "2.4.5",
+        "prettier-plugin-tailwindcss": "^0.6.14",
+        "react-intl": "^6.6.5",
+        "svgo": "^3.3.2",
+        "svgo-loader": "^4.0.0",
+        "tailwindcss": "^3",
+        "terser-webpack-plugin": "^5.3.7",
+        "typescript": "^4.8.4",
+        "umi-plugin-animation-routes": "^0.3.1",
+        "vconsole": "^3.15.1",
+        "webpack-bundle-analyzer": "^4.10.2",
+        "webpack-dev-server": "^4.15.1"
+    },
+    "build": {
+        "files": [
+            "dist/**/*",
+            "main.js"
+        ],
+        "directories": {
+            "output": "release/build"
+        }
+    }
+}

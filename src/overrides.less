@@ -1,0 +1,17 @@
+/**
+ * 高优先级全局样式文件。
+ * 该文件一般专用于覆盖第三方库样式，其中所有 CSS 选择器都会附加 body 前缀以抬高优先级。
+ */
+
+/* 设置所有自动填充输入框 */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    /* 核心技巧：用超大内阴影模拟背景 */
+    -webkit-box-shadow: 0 0 0 1000px var(--bg-color-2) inset;
+    /* 文字/光标颜色 */
+    -webkit-text-fill-color: var(--text-color);
+    /* 防止默认黄色闪烁 */
+    transition: background-color 9999s ease-in-out 0s;
+}
