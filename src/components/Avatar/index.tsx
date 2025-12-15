@@ -9,7 +9,15 @@ interface AvatarProps extends ImageProps {
 }
 
 export const Avatar: React.FC<AvatarProps> = (props) => {
-    const { className, size, fallback = 'common-empty-avatar', border = true, shape = 'circle', ...rest } = props;
+    const {
+        className,
+        size,
+        fallback = 'common-empty-avatar',
+        border = true,
+        shape = 'circle',
+        fallbackholder = true,
+        ...rest
+    } = props;
 
     return (
         <Image
@@ -20,6 +28,7 @@ export const Avatar: React.FC<AvatarProps> = (props) => {
             width={size}
             height={size}
             fallback={fallback}
+            fallbackholder={fallbackholder}
         />
     );
 };

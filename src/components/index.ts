@@ -1,5 +1,5 @@
 export * from './App';
-export * from './image';
+export * from './Image';
 export * from './Loading';
 export * from './ErrorBoundary';
 export * from './message';

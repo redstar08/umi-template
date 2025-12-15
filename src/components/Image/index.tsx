@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import classNames from 'classnames';
 import { Images, type ImagesNameType } from 'config';
 import { useModel } from '@umijs/max';
@@ -10,8 +10,9 @@ export interface ImageProps extends React.ImgHTMLAttributes<any> {
     style?: React.CSSProperties;
     src?: string;
     name?: ImagesNameType;
-    fallback?: ImagesNameType;
+    fallback?: ImagesNameType | 'xhs-posts';
     lazy?: boolean;
+    fallbackholder?: boolean;
     shape?: 'circle' | 'square' | 'radius';
     wrapper?: boolean;
     wrapperClassName?: string;
@@ -28,6 +29,7 @@ export const Image = React.forwardRef<HTMLImageElement, ImageProps>((props, ref)
         height,
         lazy = true,
         wrapper = false,
+        fallbackholder = false,
         shape = 'square',
         fallback = 'common-empty-image',
         wrapperClassName,
@@ -36,8 +38,21 @@ export const Image = React.forwardRef<HTMLImageElement, ImageProps>((props, ref)
 
     const { theme } = useModel('theme');
     const imageRef = useRef<HTMLImageElement>(null);
-    const innerSrc = name ? Images?.[name]?.[theme] : lazy ? Images?.[fallback]?.[theme] : src;
     const dataSrc = !name && lazy ? src : void 0;
+
+    const innerSrc = useMemo(() => {
+        if (name) {
+            return Images?.[name]?.[theme];
+        }
+
+        const fallbackSrc = Images[fallback]?.[theme];
+
+        if (lazy && imageRef.current?.src !== src) {
+            return fallbackSrc;
+        }
+
+        return src || fallbackSrc;
+    }, [name, lazy, fallback, src, theme]);
 
     React.useImperativeHandle(ref, () => imageRef.current as HTMLImageElement, [imageRef.current]);
 
@@ -55,7 +70,7 @@ export const Image = React.forwardRef<HTMLImageElement, ImageProps>((props, ref)
         };
     }, [imageRef.current, lazy, dataSrc]);
 
-    if ((name && !Images[name]) || (!name && !src)) return null;
+    if ((name && !Images[name]) || (!name && !src && !fallbackholder)) return null;
 
     const imageNode = (
         <img
